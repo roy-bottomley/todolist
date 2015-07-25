@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id           :integer          not null, primary key
+#  description  :string(255)      default(""), not null
+#  priority     :integer          default(0), not null
+#  due_date     :date
+#  completed    :boolean          default(FALSE), not null
+#  status       :integer          default(0), not null
+#  task_list_id :integer          not null
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 require 'rails_helper'
 
 RSpec.describe Task, :type => :model do

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: task_lists
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)      default(""), not null
+#  priority   :integer          default(0), not null
+#  user_id    :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'rails_helper'
 
 RSpec.describe TaskList, :type => :model do
@@ -84,6 +96,11 @@ RSpec.describe TaskList, :type => :model do
 
     it("should calculate the status") {
       expect(@tasklist.status).to eq  @status
+    }
+
+    it("should retrun nil for the satus if there are no tasks") {
+      tasklist = TaskList.create(name: 'nil test')
+      expect(tasklist.status).to be nil
     }
 
   end

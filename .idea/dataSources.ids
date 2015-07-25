@@ -9,4 +9,7 @@
   <data-source source="LOCAL" name="Rails todolist: production" uuid="33efbf4f-5645-46af-b9d7-cc809fe4e7ed">
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
+  <data-source source="LOCAL" name="Rails todolist: cucumber" uuid="ecf914cb-3724-4bc5-95e3-0bfd56b4f07b">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
 </component>

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: task_lists
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)      default(""), not null
+#  priority   :integer          default(0), not null
+#  user_id    :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class TaskList < ActiveRecord::Base
   belongs_to  :user, inverse_of: :task_lists
   has_many :tasks, inverse_of: :task_list, dependent: :destroy
@@ -15,7 +27,7 @@ class TaskList < ActiveRecord::Base
   end
 
   def status
-    "#{(100 * number_of_completed_tasks / number_of_tasks).floor}%"
+    "#{(100 * number_of_completed_tasks / number_of_tasks).floor}%" if number_of_tasks > 0
   end
 
 end

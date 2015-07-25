@@ -1,5 +1,17 @@
 Todolist::Application.routes.draw do
-  devise_for :users
+
+  get "weathers/show"
+  root :to => "users#index"
+  devise_for :users, controllers: { registrations: 'custom_devise/registrations'}
+
+  resources :users, :only => [:index, :show]
+
+  namespace :api, defaults: {format: :json} do
+    resources :task_lists, only: [:create, :destroy, :update]
+    resources :tasks, only: [:create, :destroy, :update]
+    resources :weathers, only: [:show]
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

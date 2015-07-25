@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id           :integer          not null, primary key
+#  description  :string(255)      default(""), not null
+#  priority     :integer          default(0), not null
+#  due_date     :date
+#  completed    :boolean          default(FALSE), not null
+#  status       :integer          default(0), not null
+#  task_list_id :integer          not null
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class Task < ActiveRecord::Base
   belongs_to :task_list, inverse_of: :tasks
 

@@ -1,0 +1,89 @@
+//set the menu highlight color
+$highlight-color: #63E9FC;
+
+body{
+  font-size: 16px;
+  line-height: 1.4;
+  font-family: Whitney,helvetica,arial,sans-serif;
+  font-weight: 400;
+  background-color: #1D3F58;
+  min-height: 100%;
+  min-width: 800px;
+  overflow: scroll;
+}
+
+// set the width of the content and put it in the middle of the screen
+.view-content{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 760px;
+  position: relative;
+  cursor: pointer;
+  display: table;
+  width: 100%;
+  background: transparent;
+
+  ul {margin: 0}
+  li {padding-bottom: 5px}
+}
+
+// define a base section from which
+// other sections will be derived to display data
+.section{
+  margin: auto;
+  display: inline-block;
+
+  vertical-align: top;
+  padding: 9px;
+  border-radius: 3px;
+  border: solid 1px #ddd;
+  background-color: #fff;
+  background-clip: padding-box;
+}
+
+// top section contains the intro
+.top-section {
+  @extend .section;
+  width: 740px;
+  margin-bottom: 10px;
+}
+
+// bottom section contains the data
+// in two sections for qualifications and subjects respectively
+.bottom-section {
+  background: transparent;
+  width: 760px;
+}
+
+.tasklist-section {
+  @extend .section;
+  width: 400px;
+  li {width: 350px}
+}
+
+.task-section {
+  @extend .section;
+  width: 300px;
+  margin-left: 10px;
+  li {width: 200px}
+}
+
+// style the flash messsage
+.flash{
+  background: #F7F9D0;
+  padding: 5px;
+  border-radius: 3px;
+  border: solid 1px #ddd;
+  background-clip: padding-box;
+  margin-left: 100px;
+}
+
+// enable menu highlighting when
+// hovering over a qualification
+.tasklist-menu-item {
+  display: block;
+}
+.tasklist-menu-item:hover {
+  background: $highlight-color;
+}
+
