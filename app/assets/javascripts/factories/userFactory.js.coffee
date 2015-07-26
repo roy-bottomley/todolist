@@ -24,7 +24,6 @@
     edit_tasklist: (model) ->
       model.newName = model.name
       model.editing = true
-      console.log(model)
 
     cancel_edit_tasklist: (model) ->
       model.editing = false

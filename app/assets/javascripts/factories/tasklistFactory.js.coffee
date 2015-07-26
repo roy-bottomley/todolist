@@ -18,8 +18,6 @@
       @serverInterface.delete(model)
 
     update_task: (model) ->
-      console.log("updating")
-      console.log(model)
       model.editing = false
       @serverInterface.update(model)
 
