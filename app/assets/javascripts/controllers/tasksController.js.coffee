@@ -1,5 +1,7 @@
 @toDoDemoApp.controller('tasksController', [ '$scope',   ($scope) ->
-  $scope.editor = null
+  $scope.sortMethod = 'priority'
+  $scope.sortDirection = true
+
 
   $scope.create= () ->
     $scope.currentTaskList.create_task({description: $scope.newTaskDescription}).then (result) =>
@@ -9,15 +11,13 @@
     if confirm "Are you sure you want to remove the task '#{task.description}'?"
       $scope.currentTaskList.delete_task(task)
 
-  $scope.update= () ->
-    $scope.currentTaskList.update_task($scope.editor).then (result) =>
-      $scope.editor = null
+  $scope.update= (task) ->
+    $scope.currentTaskList.update_task(task)
 
   $scope.edit= (task) ->
-    $scope.editor = $.extend({}, task);
+    $scope.user.edit_tasklist(task)
 
-  $scope.cancelEdit= () ->
-    $scope.editor = null
-
+  $scope.cancel= (task) ->
+    $scope.user.cancel_edit_tasklist(task)
 
 ])

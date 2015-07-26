@@ -1,14 +1,15 @@
 //set the menu highlight color
 $highlight-color: #63E9FC;
-
+$ul-padding-left: 20px;
+html { font-size: 62.5%; }
 body{
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 1.4;
   font-family: Whitney,helvetica,arial,sans-serif;
   font-weight: 400;
   background-color: #1D3F58;
   min-height: 100%;
-  min-width: 800px;
+  min-width: 1000px;
   overflow: scroll;
 }
 
@@ -23,7 +24,26 @@ body{
   width: 100%;
   background: transparent;
 
-  ul {margin: 0}
+  input {
+    font-size: 1.6rem;
+    line-height: 1.4;
+    font-family: Whitney,helvetica,arial,sans-serif;
+    font-weight: 400;
+    background-color: #e6e6e6;
+  }
+  textarea {
+    font-size: 1.6rem;
+    line-height: 1.4;
+    font-family: Whitney,helvetica,arial,sans-serif;
+    font-weight: 400;
+    background-color: #e6e6e6;
+  }
+  ul {
+    margin: 0;
+    padding-top: 10px;
+    padding-left: $ul-padding-left;
+    list-style-type: none;
+  }
   li {padding-bottom: 5px}
 }
 
@@ -44,7 +64,7 @@ body{
 // top section contains the intro
 .top-section {
   @extend .section;
-  width: 740px;
+  width: 1000px;
   margin-bottom: 10px;
 }
 
@@ -52,20 +72,89 @@ body{
 // in two sections for qualifications and subjects respectively
 .bottom-section {
   background: transparent;
-  width: 760px;
+  width: 1000px;
 }
 
 .tasklist-section {
   @extend .section;
-  width: 400px;
-  li {width: 350px}
+  width: 380px;
+
+  input {
+    width: 200px;
+  }
+
+  .new-task-list{
+    padding-left: $ul-padding-left;
+  }
+
+  li {
+    button {
+      display: inline-block
+    }
+    .tasklist-menu-item {
+      padding: 3px;
+      width: 200px;
+      display: inline-block;
+    }
+    .tasklist-menu-item:hover {
+      background: $highlight-color;
+    }
+  }
 }
 
 .task-section {
   @extend .section;
-  width: 300px;
+  width: 586px;
   margin-left: 10px;
-  li {width: 200px}
+  $text-height: 50px;
+  .task-inner-border {
+    border-left: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+    background-color: #fff;
+    background-clip: padding-box;
+  }
+  textarea {
+    @extend .task-inner-border;
+    background-color: #e6e6e6;
+    width: 400px;
+    height:  $text-height;
+  }
+
+  .new-task{
+    padding-left: $ul-padding-left;
+    textarea { margin-right: 20px;}
+  }
+
+  li {
+    .task {
+      @extend .section;
+      padding: 0;
+    }
+    button {
+      display: inline-block
+    }
+    input {
+      display: inline-block
+    }
+    .task-line {
+      display: inline-block
+    }
+    .task-menu-item {
+      @extend .task-inner-border;
+      padding: 3px;
+      width: 400px;
+      display: inline-block;
+    }
+    .due-date {
+      @extend .task-menu-item;
+      font-size: 1.4rem;
+      font-style: italic;
+      font-weight: 200;
+      background: lightblue;
+      width: 400px;
+    }
+  }
+
 }
 
 // style the flash messsage
@@ -80,10 +169,7 @@ body{
 
 // enable menu highlighting when
 // hovering over a qualification
-.tasklist-menu-item {
-  display: block;
-}
-.tasklist-menu-item:hover {
-  background: $highlight-color;
-}
 
+
+.right{ float: right}
+.clear {  clear: both;}

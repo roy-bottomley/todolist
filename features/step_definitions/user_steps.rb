@@ -54,6 +54,7 @@ end
 Given /^I am logged in$/ do
   find_user
   sign_in
+  wait_for_ajax
 end
 
 Given /^I exist as a user$/ do

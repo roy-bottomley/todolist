@@ -73,4 +73,19 @@ RSpec.describe Task, :type => :model do
       expect(task2).to be_valid
     }
   end
+
+  describe "setting priority" do
+    before(:all) {
+      tasklist = TaskList.create(name: "some task #{TaskList.count}")
+      @task0 = tasklist.tasks.create(description: 'priority0', due_date: Date.today, task_list_id: 1)
+      @task1 = tasklist.tasks.create(description: 'priority1', due_date: Date.today, task_list_id: 1)
+      @task2 = tasklist.tasks.create(description: 'priority2', due_date: Date.today, task_list_id: 1)
+    }
+
+    it("should have a higher priority for the last task added ") {
+      expect(@task1.priority).to be >  @task0.priority
+      expect(@task2.priority).to be >  @task1.priority
+    }
+
+  end
 end

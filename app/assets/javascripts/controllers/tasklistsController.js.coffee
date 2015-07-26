@@ -8,15 +8,14 @@
     if confirm "Are you sure you want to remove the tasklist #{taskList.name}?"
       $scope.user.delete_tasklist(taskList)
 
-  $scope.updateTaskList= () ->
-    $scope.user.update_tasklist($scope.editorTaskList).then (result) ->
-      $scope.editorTaskList = null
+  $scope.update= (tasklist) ->
+    $scope.user.update_tasklist(tasklist)
 
-  $scope.editTaskList= (taskList) ->
-    $scope.editorTaskList = $.extend({}, taskList);
+  $scope.edit= (taskList) ->
+    $scope.user.edit_tasklist(taskList)
 
-  $scope.cancelEdit= () ->
-    $scope.editorTaskList = null
+  $scope.cancel= (tasklist) ->
+    $scope.user.cancel_edit_tasklist(tasklist)
 
   $scope.select= (taskList) =>
     $scope.currentTaskList = $scope.user.show_tasklist(taskList)

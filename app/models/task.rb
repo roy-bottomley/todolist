@@ -20,7 +20,18 @@ class Task < ActiveRecord::Base
   validates_uniqueness_of :description, :scope => [:task_list_id, :due_date]
   validate :due_date_must_be_in_the_future
 
+  before_create :set_priority
+  before_create :set_due_date
+
   private
+
+  def set_priority
+     self.priority =  task_list.tasks.maximum('priority') + 1 if task_list && task_list.tasks.size > 0
+  end
+
+  def set_due_date
+    self.due_date =  Date.today + 1.year if self.due_date.blank?
+  end
 
   def due_date_must_be_in_the_future
     errors.add(:due_date, "must be in the future") if

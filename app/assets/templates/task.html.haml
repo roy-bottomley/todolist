@@ -1,0 +1,16 @@
+.task
+  %input{'type'=>'checkbox', 'ng-model' => 'task.completed', 'ng-change' => 'update(task)' }
+  .task-line
+    .due-date
+      {{task.due_date_formatted}}
+    %div{'ng-hide' => 'task.editing'}
+      .task-menu-item
+        {{task.description}}
+      %button{'ng-click' => 'edit(task)'} Edit
+      %button{'ng-click' => 'delete(task)'} Delete
+    %div{'ng-show' => 'task.editing'}
+      %textarea{'ng-model' => 'task.description'}
+      %button{'ng-click' => 'update(task)'} Save
+      %button{'ng-click' => 'cancel(task)'} Cancel
+
+  .clear

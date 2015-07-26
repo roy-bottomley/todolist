@@ -36,6 +36,8 @@
             index = @list.indexOf(object)
             @list.splice index, 1
             @list.push(data.model)
+            console.log("updated data")
+            console.log(data.model)
             deferred.resolve(data.model)
           else
             errorHandler.process(data.errors)
@@ -60,6 +62,8 @@
             @list.pop()
           for model in data
             @list.push(model)
+          console.log('index data')
+          console.log(data)
           deferred.resolve(@list)
         else
           errorHandler.process("Server Error please try later")

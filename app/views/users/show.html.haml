@@ -10,29 +10,21 @@
   .any{'ng-controller' => 'tasklistsController'}
     .tasklist-section
       %h2 Tasklists
-      %input#tasklistEditName{'ng-model' => 'editorTaskList.name'}
-      %button{'ng-click' => 'updateTaskList()'} Save
-      %button{'ng-click' => 'cancelEdit()'} Cancel
-      %br
-      %input#tasklistNewName{'ng-model' => 'newTaskName'}
-      %button{'ng-click' => 'create()'} Add Task List
-      Task Lists (count {{user.number_of_tasks}})
-      %ul.tasklists-ul
-        %li.tasklist-menu-item{'ng-repeat'=>'tasklist in user.tasklists', 'ng-click' => 'select(tasklist)'}
-          {{tasklist.name}}
-          %button.right{'ng-click' => 'editTaskList(tasklist)'} Edit
-          %button.right{'ng-click' => 'delete(tasklist)'} Delete
+      .new-task-list
+        %input#tasklistNewName{'ng-model' => 'newTaskName'}
+        %button{'ng-click' => 'create()'} Add New Tasklist
+      %p{'ng-hide'=>'user.tasklists.length > 0'}
+        You have no tasklists
+      %ul{'ng-show'=>'user.tasklists.length > 0'}
+        %li{'ng-repeat'=>'tasklist in user.tasklists | orderBy:sortMethod:sortDirection ',  'ng-include' => "'tasklist.html'"}
+
     .task-section{'ng-controller' => 'tasksController'}
       %h2 tasks
-      %input#taskEditorDescription{'ng-model' => 'editor.description'}
-      %button{'ng-click' => 'update()'} Save
-      %button{'ng-click' => 'cancelEdit()'} Cancel
-      %br
-      %input#taskNewDescription{'ng-model' => 'newTaskDescription'}
-      %button{'ng-click' => 'create()'} Add Task
-      Task Lists (count {{currentTaskList.tasks.length}})
-      %ul.tasklists-ul
-        %li{'ng-repeat'=>'task in currentTaskList.tasks'}
-          {{task.description}}
-          %button.right{'ng-click' => 'edit(task)'} Edit
-          %button.right{'ng-click' => 'delete(task)'} Delete
+      .new-task
+        %textarea#taskNewDescription{'ng-model' => 'newTaskDescription'}
+        %button{'ng-click' => 'create()'} Add New Task
+      %p{'ng-hide'=>'currentTaskList.tasks.length > 0'}
+        This tasklist has no tasks
+      %ul{'ng-show'=>'currentTaskList.tasks.length > 0'}
+        %li{'ng-repeat'=>'task in currentTaskList.tasks  | orderBy:sortMethod:sortDirection', 'ng-include' => "'task.html'"}
+

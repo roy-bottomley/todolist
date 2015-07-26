@@ -16,10 +16,22 @@ def create_valid_tasklist
   @valid_tasklist ||= { name:  "a_valid_tasklist", priority: 0}
 end
 
+def active_editor_for_tasklist
+  begin
+    find(:xpath,"//div[contains(@class,'tasklist-section')]/ul//input")
+  rescue
+    nil
+  end
+end
+
+def click_save_for_edited_tasklist
+  find(:xpath,"//div[contains(@class,'tasklist-section')]/ul//button[text() = 'Save']").click()
+end
+
 When(/^I add a valid task list$/) do
   create_valid_tasklist
   fill_in "tasklistNewName", :with => @valid_tasklist[:name]
-  click_button "Add Task List"
+  click_button "Add New Tasklist"
   wait_for_ajax
 end
 
@@ -29,7 +41,7 @@ end
 
 When(/^I add a task list "([^"]*)"$/) do |tasklist_name|
   fill_in "tasklistNewName", :with => tasklist_name
-  click_button "Add Task List"
+  click_button "Add New Tasklist"
   wait_for_ajax
 end
 
@@ -56,17 +68,16 @@ When(/^I edit the task list "([^"]*)"$/) do |arg|
 end
 
 Then(/^The editor should contain "([^"]*)"$/) do |tasklist_name|
-  expect(find("#tasklistEditName").value).to eq tasklist_name
+  expect(active_editor_for_tasklist.value).to eq tasklist_name
 end
 
 When(/^I change the name to "([^"]*)" and click save$/) do |new_name|
-  fill_in "tasklistEditName", with: new_name
-  item = find(:xpath,"//div[contains(@class,'tasklist-section')]/button[text() = 'Save']")
-  item.click()
+  active_editor_for_tasklist.set(new_name)
+  click_save_for_edited_tasklist
   wait_for_ajax
 end
 
 And(/^The editor should be empty$/) do
-  expect(find("#tasklistEditName").value).to eq ''
+  expect(active_editor_for_tasklist).to be nil
 end
 

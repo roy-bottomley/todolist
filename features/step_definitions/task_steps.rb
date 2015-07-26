@@ -11,19 +11,39 @@ def add_tasklist(name, number_of_tasks)
   number_of_tasks.times do |i|
     tl.tasks.create(description: "#{name} task #{i}")
   end
+end
 
+def active_editor_for_task
+  begin
+    find(:xpath,"//div[contains(@class,'task-section')]/ul//textarea")
+  rescue
+    nil
+  end
+end
+
+def click_save_for_edited_task
+  find(:xpath,"//div[contains(@class,'task-section')]/ul//button[text() = 'Save']").click()
+end
+
+def click_delete_for_task description
+  find(:xpath,"//div[contains(@class,'task-section')]/ul//*[text()[contains(.,'#{description}')]]/..//button[text() = 'Delete']").click()
+end
+
+def click_edit_for_task description
+  find(:xpath,"//div[contains(@class,'task-section')]/ul//*[text()[contains(.,'#{description}')]]/..//button[text() = 'Edit']").click()
 end
 
 When(/^I select the tasklist "([^"]*)"$/) do |tasklist_name|
-  item = find(:xpath,"//div[contains(@class,'tasklist-section')]/*/*[text()[contains(.,'#{tasklist_name}')]]")
+  item = find(:xpath,"//div[contains(@class,'tasklist-section')]//ul//*[text()[contains(.,'#{tasklist_name}')]]")
   item.click()
 end
 
 
 When(/^I add a valid task$/) do
   create_valid_task
-  fill_in "taskNewDescription", with: @valid_task[:description]
-  click_button "Add Task"
+  create_valid_tasklist
+  fill_in "taskNewDescription", :with => @valid_tasklist[:name]
+  click_button "Add New Task"
   wait_for_ajax
 end
 
@@ -43,7 +63,7 @@ end
 
 When(/^I add a task  "([^"]*)"$/) do |task_description|
   fill_in "taskNewDescription", with: task_description
-  click_button "Add Task"
+  click_button "Add New Task"
   wait_for_ajax
 end
 
@@ -69,29 +89,26 @@ And(/^The new task editor should be empty$/) do
 end
 
 When(/^I delete the task "([^"]*)"$/) do |task_description|
-  item = find(:xpath,"//*[text()[contains(.,'#{task_description}')]]/button[2]")
-  item.click()
+  click_delete_for_task   task_description
   handleAlert
   wait_for_ajax
 end
 
 When(/^I edit the task "([^"]*)"$/) do |task_description|
-  item = find(:xpath,"//*[text()[contains(.,'#{task_description}')]]/button[1]")
-  item.click()
+  click_edit_for_task task_description
 end
 
 Then(/^The task editor should contain "([^"]*)"$/) do |task_description|
-  expect(find("#taskEditorDescription").value).to eq task_description
+  expect(active_editor_for_task.value).to eq task_description
 end
 
 And(/^The task editor should be empty$/) do
-  expect(find("#taskEditorDescription").value).to eq ''
+  expect(active_editor_for_task).to be nil
 end
 
 When(/^I change the task name to "([^"]*)" and click save$/) do |new_description|
-  fill_in "taskEditorDescription", with: new_description
-  item = find(:xpath,"//div[contains(@class,'task-section')]/button[text() = 'Save']")
-  item.click()
+  active_editor_for_task.set(new_description)
+  click_save_for_edited_task
   wait_for_ajax
 end
 

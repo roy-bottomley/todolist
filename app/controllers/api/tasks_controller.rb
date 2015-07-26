@@ -40,7 +40,7 @@ class Api::TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:model).permit(:description, :priority, :due_date)
+    params.require(:model).permit(:description, :priority, :due_date, :completed)
   end
 
 end
