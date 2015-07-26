@@ -1,11 +1,10 @@
-@toDoDemoApp.controller('usersController', [ '$scope', 'appInitializer', 'taskListFactory', 'weatherFactory', ($scope, appInitializer, taskListFactory, weatherFactory) ->
-  $scope.user =  appInitializer
+@toDoDemoApp.controller('usersController', [ '$scope', 'appInitializer',  'Weather', 'User', ($scope, appInitializer, Weather, User) ->
 
-  $scope.weather ={locations: []}
-  $scope.weatherFactory = new weatherFactory($scope.weather)
-  $scope.weatherFactory.show('home')
+  $scope.user = new User(appInitializer.id)
 
-  $scope.taskListFactory = new taskListFactory($scope.user.task_lists)
+  $scope.weather = new Weather()
 
+  $scope.showWeather= () ->
+    $scope.weather.show()
 
 ])

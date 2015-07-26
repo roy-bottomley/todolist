@@ -183,3 +183,4 @@ Then /^I should see my name$/ do
   create_user
   page.body.should have_content @user[:email]
 end
+

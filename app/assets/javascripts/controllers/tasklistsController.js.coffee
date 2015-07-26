@@ -1,15 +1,15 @@
-@toDoDemoApp.controller('tasklistsController', [ '$scope', 'taskFactory',  ($scope, taskFactory) ->
+@toDoDemoApp.controller('tasklistsController', [ '$scope',($scope) ->
 
-  $scope.addTaskList= () ->
-    $scope.taskListFactory.create({name: $scope.newTaskName}).then (result) =>
-      $scope.newTaskName = ''
+  $scope.create= () ->
+    $scope.user.create_tasklist({name: $scope.newTaskName}).then (result) ->
+      $scope.newTaskDescription = ''
 
-  $scope.deleteTaskList= (taskList) ->
-    if confirm "Are you sure you want to remove this list?"
-      $scope.taskListFactory.delete(taskList)
+  $scope.delete= (taskList) ->
+    if confirm "Are you sure you want to remove the tasklist #{taskList.name}?"
+      $scope.user.delete_tasklist(taskList)
 
   $scope.updateTaskList= () ->
-    $scope.taskListFactory.update($scope.editorTaskList).then (result) =>
+    $scope.user.update_tasklist($scope.editorTaskList).then (result) ->
       $scope.editorTaskList = null
 
   $scope.editTaskList= (taskList) ->
@@ -19,7 +19,6 @@
     $scope.editorTaskList = null
 
   $scope.select= (taskList) =>
-    $scope.currentTaskList = taskList
-    $scope.taskFactory = new taskFactory(taskList)
+    $scope.currentTaskList = $scope.user.show_tasklist(taskList)
 
 ])

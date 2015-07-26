@@ -1,16 +1,16 @@
-@toDoDemoApp.controller('tasksController', [ '$scope',  'taskFactory', ($scope, appInitializer, taskFactory) ->
+@toDoDemoApp.controller('tasksController', [ '$scope',   ($scope) ->
   $scope.editor = null
 
   $scope.create= () ->
-    $scope.taskFactory.create({description: $scope.newTaskDescription}).then (result) =>
+    $scope.currentTaskList.create_task({description: $scope.newTaskDescription}).then (result) =>
       $scope.newTaskDescription = ''
 
   $scope.delete= (task) ->
     if confirm "Are you sure you want to remove the task '#{task.description}'?"
-      $scope.taskFactory.delete(task)
+      $scope.currentTaskList.delete_task(task)
 
   $scope.update= () ->
-    $scope.taskFactory.update($scope.editor).then (result) =>
+    $scope.currentTaskList.update_task($scope.editor).then (result) =>
       $scope.editor = null
 
   $scope.edit= (task) ->

@@ -15,13 +15,13 @@
       %button{'ng-click' => 'cancelEdit()'} Cancel
       %br
       %input#tasklistNewName{'ng-model' => 'newTaskName'}
-      %button{'ng-click' => 'addTaskList()'} Add Task List
+      %button{'ng-click' => 'create()'} Add Task List
       Task Lists (count {{user.number_of_tasks}})
       %ul.tasklists-ul
-        %li.tasklist-menu-item{'ng-repeat'=>'tasklist in user.task_lists', 'ng-click' => 'select(tasklist)'}
+        %li.tasklist-menu-item{'ng-repeat'=>'tasklist in user.tasklists', 'ng-click' => 'select(tasklist)'}
           {{tasklist.name}}
           %button.right{'ng-click' => 'editTaskList(tasklist)'} Edit
-          %button.right{'ng-click' => 'deleteTaskList(tasklist)'} Delete
+          %button.right{'ng-click' => 'delete(tasklist)'} Delete
     .task-section{'ng-controller' => 'tasksController'}
       %h2 tasks
       %input#taskEditorDescription{'ng-model' => 'editor.description'}

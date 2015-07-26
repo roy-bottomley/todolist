@@ -12,5 +12,8 @@
     %br
   More information
   %br
-  %span
-    %a{'ng-href'=>"{{location.link}}"} here
+  %a{'ng-href'=>"{{location.link}}"} here
+  %p
+    Weather location
+    %input{'ng-model' => 'weather.currentLocation'}
+    %button{'ng-click' => 'showWeather()'} Change

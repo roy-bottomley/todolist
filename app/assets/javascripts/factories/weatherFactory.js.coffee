@@ -1,12 +1,15 @@
-@toDoDemoApp.factory 'weatherFactory', [  'serverInterface', (serverInterface) ->
-  class weatherFactory extends serverInterface
-    constructor: (@weather) ->
+@toDoDemoApp.factory 'Weather', [  'serverInterface', (serverInterface) ->
+  class Weather extends serverInterface
+    constructor: () ->
       # server address for weather
-      @location = []
-      super('/api/weathers/', @locations)
+      @locations = []
+      @serverInterface = new serverInterface('/api/weathers/', @locations)
+      @show()
+
       
-    show: (location) ->
-      super(location).then (weather) =>
+    show: () ->
+      @currentLocation = 'home' if !@currentLocation?
+      @serverInterface.show(@currentLocation).then (weather) =>
 
         weather_details = {
           url: weather.doc.image.url,
@@ -25,10 +28,9 @@
             high: weather.doc.item.forecast[day].high
             low: weather.doc.item.forecast[day].low
           }
-          @locations = []
           weather_details.forecasts.push(forecast)
 
-        @weather.locations = [weather_details]
-
+        @currentLocation = weather.doc.location.city
+        @locations = [weather_details]
 
 ]

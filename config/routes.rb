@@ -7,8 +7,8 @@ Todolist::Application.routes.draw do
   resources :users, :only => [:index, :show]
 
   namespace :api, defaults: {format: :json} do
-    resources :task_lists, only: [:create, :destroy, :update]
-    resources :tasks, only: [:create, :destroy, :update]
+    resources :task_lists, only: [:index, :create, :destroy, :update]
+    resources :tasks, only: [:index, :create, :destroy, :update]
     resources :weathers, only: [:show]
   end
 

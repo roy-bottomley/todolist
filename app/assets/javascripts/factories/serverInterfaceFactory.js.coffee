@@ -51,4 +51,21 @@
         else
           errorHandler.process("Server Error please try later")
       )
+
+    all: (parent) ->
+      deferred = $q.defer()
+      @service.query(parent_id: parent).$promise.then( (data) =>
+        if data?
+          for model in @list
+            @list.pop()
+          for model in data
+            @list.push(model)
+          deferred.resolve(@list)
+        else
+          errorHandler.process("Server Error please try later")
+      )
+      return deferred.promise
+
+
+
 ]

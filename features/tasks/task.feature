@@ -40,3 +40,15 @@ Feature: Task
       Then  I should not see the "cucumber_task" task
       And   I should see the "edited_task" task
       And   The task editor should be empty
+
+  @javascript
+    Scenario: User views tasks in several tasklists
+      Given I exist as a user
+      And   I have three tasklists
+      And   I am logged in
+      When  I select the tasklist "tl1"
+      Then  I should see the tasks belonging to tasklist "tl1"
+      When  I select the tasklist "tl1"
+      Then  I should see the tasks belonging to tasklist "tl1"
+      When  I select the tasklist "tl1"
+      Then  I should see the tasks belonging to tasklist "tl1"

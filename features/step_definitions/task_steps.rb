@@ -6,10 +6,16 @@ def create_valid_task
   @valid_task ||= { description:  "a_valid_task", priority: 0, due_date: 'Date.today + 1.day'}
 end
 
+def add_tasklist(name, number_of_tasks)
+  tl = @user.task_lists.create(name: name)
+  number_of_tasks.times do |i|
+    tl.tasks.create(description: "#{name} task #{i}")
+  end
+
+end
+
 When(/^I select the tasklist "([^"]*)"$/) do |tasklist_name|
-  item = find(:xpath,"//*[text()[contains(.,'#{tasklist_name}')]]")
-  value = item.value
-  # item = find("//li[@value = tasklist_name]")
+  item = find(:xpath,"//div[contains(@class,'tasklist-section')]/*/*[text()[contains(.,'#{tasklist_name}')]]")
   item.click()
 end
 
@@ -27,7 +33,12 @@ end
 
 And(/^I have a tasklist "([^"]*)"$/) do |tasklist_name|
   @user.task_lists.create(name: tasklist_name)
-  a = 1
+end
+
+And(/^I have three tasklists$/) do
+  add_tasklist('tl1', 2)
+  add_tasklist('tl2', 3)
+  add_tasklist('tl3', 4)
 end
 
 When(/^I add a task  "([^"]*)"$/) do |task_description|
@@ -36,8 +47,17 @@ When(/^I add a task  "([^"]*)"$/) do |task_description|
   wait_for_ajax
 end
 
+def check_view_task task
+  expect(page.body).to have_content(task.description)
+end
+
 Then(/^I should see the "([^"]*)" task$/) do |task_description|
   expect(page.body).to have_content(task_description)
+end
+
+Then(/^I should see the tasks belonging to tasklist "([^"]*)"$/) do |name|
+  tasklist = @user.task_lists.where(name: name).first
+  tasklist.tasks.each{|task| check_view_task(task)}
 end
 
 Then(/^I should not see the "([^"]*)" task$/) do |task_description|

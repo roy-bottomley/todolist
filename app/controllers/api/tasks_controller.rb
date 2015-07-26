@@ -1,6 +1,10 @@
 class Api::TasksController < ApplicationController
   before_action :check_owner, only: [:create, :update, :destroy]
 
+  def index
+    render json: task_list.tasks
+  end
+
   def create
     task = task_list.tasks.create(task_params)
     if task.valid?
@@ -32,7 +36,7 @@ class Api::TasksController < ApplicationController
   end
 
   def task_list
-    @task_list ||= task ? task.task_list : TaskList.find(params[:model][:task_list_id])
+    @task_list ||= task ? task.task_list : TaskList.find(params[:parent_id] || params[:model][:task_list_id])
   end
 
   def task_params

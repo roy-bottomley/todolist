@@ -1,6 +1,10 @@
 class Api::TaskListsController < ApplicationController
   before_action :check_owner, only: [:update, :destroy]
 
+  def index
+    render json: current_user.task_lists
+  end
+
   def create
     task_list = current_user.task_lists.create(task_list_params)
     if task_list.valid?
