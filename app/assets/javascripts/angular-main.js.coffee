@@ -1,4 +1,4 @@
-@toDoDemoApp = angular.module('toDoDemoApp', ['ngResource', 'templates'])
+@toDoDemoApp = angular.module('toDoDemoApp', [])
 
 @toDoDemoApp.config ($httpProvider, $locationProvider) ->
   authToken = $("meta[name=\"csrf-token\"]").attr("content")
