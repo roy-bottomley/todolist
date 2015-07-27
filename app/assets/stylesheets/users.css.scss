@@ -83,7 +83,17 @@ body{
   text-align: center;
   margin-top: 0;
 }
-
+.devise-section {
+  @extend .section;
+  input {
+    width: 300px
+  }
+  .submit {
+    input {
+      width: 100px
+    }
+  }
+}
 // top section contains the intro
 .top-section {
   @extend .section;

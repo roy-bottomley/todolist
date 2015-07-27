@@ -5,11 +5,11 @@ Feature: Sign up
 
     Background:
       Given I am not logged in
-
+  @javascript
     Scenario: User signs up with valid data
       When I sign up with valid user data
       Then I should be signed in
-      
+
     Scenario: User signs up with invalid email
       When I sign up with an invalid email
       Then I should see an invalid email message
