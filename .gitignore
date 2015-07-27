@@ -15,6 +15,5 @@
 /log/*.log
 /tmp
 
-*.lock
 *.xml
 *~
