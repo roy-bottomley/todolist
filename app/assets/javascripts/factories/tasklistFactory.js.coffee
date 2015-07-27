@@ -1,4 +1,4 @@
-@toDoDemoApp.factory 'Tasklist', [  'serverInterface', '$filter',  (serverInterface, $filter) ->
+@toDoDemoApp.factory 'Tasklist', [  'serverInterface',  (serverInterface) ->
   class Tasklist
 
     constructor: (tasklist) ->
