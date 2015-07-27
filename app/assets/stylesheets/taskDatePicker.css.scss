@@ -1,0 +1,18 @@
+.date-holder {
+  position: relative;
+  .date-editor {
+    z-index: 0;
+    top: 0;
+    left: 0;
+    height: 1px;
+    position: absolute;
+    opacity: 0;
+  }
+  .date-label {
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 1;
+    background: transparent;
+  }
+}
