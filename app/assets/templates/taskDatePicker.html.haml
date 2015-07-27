@@ -1,4 +1,4 @@
 .date-holder
   .date-label{'ng-click' => 'showDatepicker()'}
     {{task.due_date_formatted}}
-  %input.date-editor{'type'=>"text", 'ui-date' => '', 'ng-model'=>'task.due_date', 'ng-change' => 'dateChanged()'}
+  %input.date-editor{'type'=>"text", 'ui-date' => '', 'ng-model'=>'tdate', 'ng-change' => 'dateChanged()'}

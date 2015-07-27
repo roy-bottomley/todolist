@@ -3,7 +3,7 @@
   .location
     {{location.title}}
     %br
-    {{location.condition}} degrees {{location.temperature}}
+    Temperature {{location.temperature}} {{degreeSymbol()}}{{location.units}}
     %br
     More information
     %a{'ng-href'=>"{{location.link}}"} here

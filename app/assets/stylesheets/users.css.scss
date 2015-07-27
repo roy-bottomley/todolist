@@ -23,6 +23,7 @@ body{
   display: table;
   width: 100%;
   background: transparent;
+  position: relative;
 
   input {
     font-size: 1.6rem;
@@ -66,6 +67,10 @@ body{
   font-style: italic;
   font-weight: 200;
 }
+.strike {
+  text-decoration: line-through;
+}
+
 .red-font {
   color: red
 }
@@ -114,7 +119,14 @@ body{
 .tasklist-section {
   @extend .section;
   width: 380px;
-
+  .info {
+    display: inline-block;
+    width: 220px;
+  }
+  .buttons {
+    display: inline-block;
+    width: 130px
+  }
   input {
     width: 200px;
   }
@@ -242,6 +254,9 @@ body{
   border: solid 1px #ddd;
   background-clip: padding-box;
   margin-left: 100px;
+  position: absolute;
+  top: 0;
+  left: 10px;
 }
 
 // enable menu highlighting when

@@ -7,11 +7,7 @@ class Api::TasksController < ApplicationController
 
   def create
     task = task_list.tasks.create(task_params)
-    if task.valid?
-      render json: {success: true, model: task}
-    else
-      render json: {success: false, errors: task.errors}
-    end
+    render json: task
   end
 
 

@@ -9,8 +9,10 @@
       @tasks = []
       @orderBy  = 'priority'
       @orderDesc = true
+
       @serverInterface = new serverInterface('/api/tasks/', @tasks)
-      @serverInterface.all(tasklist.id)
+      @serverInterface.all(tasklist.id).then () =>
+        @updateCompleted()
 
     create_task: (model) ->
       model.task_list_id = @id
@@ -25,6 +27,7 @@
       updated_model.priority = updated_model.newPriority if updated_model.newPriority?
       @serverInterface.update(updated_model).then (data) =>
         model.editing = false
+        @updateCompleted()
 
     edit_task: (model) ->
       model.newDescription = model.description
@@ -35,13 +38,14 @@
       model.newDescription = null
       model.editing = false
 
-
     setSortOrder: () ->
       @orderDesc =  @orderBy == 'priority'
       @tasks.sort= (a, b) ->
        return a.priority > b.priority
 
-    disableReorder: () ->
-      @orderBy != 'priority'
+    updateCompleted: () ->
+      @completed = 0
+      for task in @tasks
+        @completed  += 1 if task.completed
 
 ]

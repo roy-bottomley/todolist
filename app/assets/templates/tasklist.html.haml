@@ -1,11 +1,11 @@
 .tasklist
-  %div{'ng-hide' => 'tasklist.editing'}
-    .tasklist-menu-item{'ng-click' => 'select(tasklist)'} {{tasklist.name}}
-    %button.btn{'ng-click' => 'edit(tasklist)'} Edit
-    %button.btn{'ng-click' => 'delete(tasklist)'} Delete
-  %div{'ng-show' => 'tasklist.editing'}
-    %input{'ng-model' => 'tasklist.newName'}
-    %button.btn{'ng-click' => 'update(tasklist)'} Save
-    %button.btn{'ng-click' => 'cancel(tasklist)'} Cancel
-
-  .clear
+  .info
+    .tasklist-menu-item{'ng-hide' => 'tasklist.editing', 'ng-click' => 'select(tasklist)'} {{tasklist.name}}
+    %input{'ng-show' => 'tasklist.editing', 'ng-model' => 'tasklist.newName'}
+  .buttons
+    %div{'ng-hide' => 'tasklist.editing'}
+      %button.btn{'ng-click' => 'edit(tasklist)'} Edit
+      %button.btn{'ng-click' => 'delete(tasklist)'} Delete
+    %div{'ng-show' => 'tasklist.editing'}
+      %button.btn{'ng-click' => 'update(tasklist)'} Save
+      %button.btn{'ng-click' => 'cancel(tasklist)'} Cancel

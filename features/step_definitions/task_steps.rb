@@ -15,27 +15,28 @@ end
 
 def active_editor_for_task
   begin
-    find(:xpath,"//div[contains(@class,'task-section')]/ul//textarea")
+    find(:xpath,"//div[contains(@class,'task-section')]//ul//textarea")
   rescue
     nil
   end
 end
 
 def click_save_for_edited_task
-  find(:xpath,"//div[contains(@class,'task-section')]/ul//button[text() = 'Save']").click()
+  find(:xpath,"//div[contains(@class,'task-section')]//ul//button[text() = 'Save']").click()
 end
 
 def click_delete_for_task description
-  find(:xpath,"//div[contains(@class,'task-section')]/ul//*[text()[contains(.,'#{description}')]]/..//button[text() = 'Delete']").click()
+  find(:xpath,"//div[contains(@class,'task-section')]//ul//*[text()[contains(.,'#{description}')]]/..//button[text() = 'Delete']").click()
 end
 
 def click_edit_for_task description
-  find(:xpath,"//div[contains(@class,'task-section')]/ul//*[text()[contains(.,'#{description}')]]/..//button[text() = 'Edit']").click()
+  find(:xpath,"//div[contains(@class,'task-section')]//ul//*[text()[contains(.,'#{description}')]]/..//button[text() = 'Edit']").click()
 end
 
 When(/^I select the tasklist "([^"]*)"$/) do |tasklist_name|
   item = find(:xpath,"//div[contains(@class,'tasklist-section')]//ul//*[text()[contains(.,'#{tasklist_name}')]]")
   item.click()
+  wait_for_ajax
 end
 
 

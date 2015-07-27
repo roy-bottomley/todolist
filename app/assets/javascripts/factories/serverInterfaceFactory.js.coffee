@@ -18,9 +18,11 @@
     create: (object) ->
       deferred = $q.defer()
       new @service(model: object).$save ((data) =>
-        if data.success
-          @list.push(data.model)
-          deferred.resolve(data.model)
+        if !data?
+          errorHandler.process("Server Error please try later")
+        else if data.valid
+          @list.push(data)
+          deferred.resolve(data)
         else
           errorHandler.process(data.errors)
        )

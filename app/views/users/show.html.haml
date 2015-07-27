@@ -1,5 +1,5 @@
 %script= render "users/app_initializer.js.erb"
-.any{'ng-controller' => 'usersController'}
+%div{'ng-controller' => 'usersController'}
   %flash
   .top-section
     %h2.title-intro Logged in as
@@ -19,19 +19,26 @@
         %li{'ng-repeat'=>'tasklist in user.tasklists | orderBy:sortMethod:sortDirection ',  'ng-include' => "'tasklist.html'"}
 
     .task-section
-      %h2.title-intro Tasks for
-      %h2.title
-        {{currentTaskList.name}}
-      %p
-        Order tasks by
-        %input{'type' => 'radio', 'ng-model'=>'currentTaskList.orderBy', 'value'=>'due_date', 'ng-change'=>"changeSort()"} Due Date
-        %input{'type' => 'radio', 'ng-model'=>'currentTaskList.orderBy', 'value'=>'priority', 'ng-change'=>"changeSort()"} Priority
-      .new-task
-        %textarea#taskNewDescription{'ng-model' => 'newTaskDescription'}
-        %button.btn{'ng-click' => 'createTask()'} Add New Task
-      %p{'ng-hide'=>'currentTaskList.tasks.length > 0'}
-        This tasklist has no tasks
-      %ul{'ng-show'=>'currentTaskList.tasks.length > 0'}
-        %li{'ng-repeat'=>'task in currentTaskList.tasks | orderBy:currentTaskList.orderBy:currentTaskList.orderDesc',
-              'ng-include' => "'task.html'"}
+      %div{'ng-hide' => 'currentTaskList'}
+        %h3 No Tasklist selected
+      %div{'ng-show' => 'currentTaskList'}
+        %h2.title-intro Tasks for
+        %h2.title
+          {{currentTaskList.name}}
+        %p{'ng-show' => 'currentTaskList.completed > 0'}
+          {{currentTaskList.completed}} of {{currentTaskList.tasks.length}} tasks completed
+        %p{'ng-hide' => 'currentTaskList.completed > 0'}
+          Tasklist not yet started
+        %p
+          Order tasks by
+          %input{'type' => 'radio', 'ng-model'=>'currentTaskList.orderBy', 'value'=>'due_date', 'ng-change'=>"changeSort()"} Due Date
+          %input{'type' => 'radio', 'ng-model'=>'currentTaskList.orderBy', 'value'=>'priority', 'ng-change'=>"changeSort()"} Priority
+        .new-task
+          %textarea#taskNewDescription{'ng-model' => 'newTaskDescription'}
+          %button.btn{'ng-click' => 'createTask()'} Add New Task
+        %p{'ng-hide'=>'currentTaskList.tasks.length > 0'}
+          This tasklist has no tasks
+        %ul{'ng-show'=>'currentTaskList.tasks.length > 0'}
+          %li{'ng-repeat'=>'task in currentTaskList.tasks | orderBy:currentTaskList.orderBy:currentTaskList.orderDesc',
+                'ng-include' => "'task.html'"}
 

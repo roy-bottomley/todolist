@@ -9,7 +9,7 @@
           {{task.priority}}
         %input{'ng-show' => 'task.editing','ng-model' => 'task.newPriority'}
     %div{'ng-hide' => 'task.editing'}
-      .task-menu-item
+      .task-menu-item{'ng-class'=>"{'strike' : task.completed}"}
         {{task.description}}
       %button.small-btn{'ng-click' => 'edit()'} Edit
       %button.small-btn{'ng-click' => 'delete()'} Delete
