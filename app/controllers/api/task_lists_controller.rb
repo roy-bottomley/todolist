@@ -21,8 +21,8 @@ class Api::TaskListsController < ApplicationController
   end
 
   def update
-    success =  task_list.update_attributes(task_list_params)
-    render json: {success: success, model: task_list}, status: 200
+    task_list.update_attributes(task_list_params)
+    render json:  task_list, status: 200
   end
 
   private

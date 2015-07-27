@@ -1,4 +1,4 @@
-@toDoDemoApp.controller('tasklistsController', [ '$scope',($scope) ->
+@toDoDemoApp.controller('tasklistsController', [ '$scope', '$timeout',($scope, $timeout) ->
 
   $scope.create= () ->
     $scope.user.create_tasklist({name: $scope.newTaskName}).then (result) ->
@@ -19,5 +19,15 @@
 
   $scope.select= (taskList) =>
     $scope.currentTaskList = $scope.user.show_tasklist(taskList)
+
+  $scope.createTask= () ->
+    $scope.currentTaskList.create_task({description: $scope.newTaskDescription}).then (result) =>
+      $scope.newTaskDescription = ''
+
+  $scope.changeSort= () =>
+    $scope.currentTaskList.setSortOrder()
+
+
+
 
 ])

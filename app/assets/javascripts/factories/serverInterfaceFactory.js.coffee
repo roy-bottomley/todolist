@@ -1,7 +1,12 @@
 @toDoDemoApp.factory 'serverInterface', [ '$http', '$resource', '$q', 'errorHandler',  ($http, $resource, $q, errorHandler) ->
   class serverInterface
 
-    constructor: (url, @list )->
+    removeIdFromList= (id, list) ->
+      for item, index in list
+        break if item.id == id
+      list.splice index, 1  if list[index].id == id
+
+    constructor: (url, @list)->
       @service = $resource("#{url}:id",
         {id: '@id'},
         {update: {method: 'PATCH'}})
@@ -32,13 +37,15 @@
     update: (object) ->
       deferred = $q.defer()
       new @service(model: object).$update {id: object.id}, ( (data) =>
-          if data.success
-            index = @list.indexOf(object)
-            @list.splice index, 1
-            @list.push(data.model)
-            deferred.resolve(data.model)
-          else
-            errorHandler.process(data.errors)
+        if !data?
+          errorHandler.process("Server Error please try later")
+        else if data.valid
+          index = @list.indexOf(object)
+          removeIdFromList data.id, @list
+          @list.push(data)
+          deferred.resolve(data)
+        else
+          errorHandler.process(data.errors)
         )
 
       return deferred.promise
@@ -65,7 +72,6 @@
           errorHandler.process("Server Error please try later")
       )
       return deferred.promise
-
 
 
 ]

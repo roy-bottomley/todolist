@@ -21,8 +21,8 @@ class Api::TasksController < ApplicationController
   end
 
   def update
-    success =  task.update_attributes(task_params)
-    render json: {success: success, model: task}, status: 200
+    success = task.update_attributes(task_params)
+    render json: task, status: 200
   end
 
   private

@@ -18,13 +18,20 @@
       %ul{'ng-show'=>'user.tasklists.length > 0'}
         %li{'ng-repeat'=>'tasklist in user.tasklists | orderBy:sortMethod:sortDirection ',  'ng-include' => "'tasklist.html'"}
 
-    .task-section{'ng-controller' => 'tasksController'}
-      %h2 tasks
+    .task-section
+      %h2.task-intro Tasks for
+      %h2.task-title
+        {{currentTaskList.name}}
+      %p
+        Order tasks by
+        %input{'type' => 'radio', 'ng-model'=>'currentTaskList.orderBy', 'value'=>'due_date', 'ng-change'=>"changeSort()"} Due Date
+        %input{'type' => 'radio', 'ng-model'=>'currentTaskList.orderBy', 'value'=>'priority', 'ng-change'=>"changeSort()"} Priority
       .new-task
         %textarea#taskNewDescription{'ng-model' => 'newTaskDescription'}
-        %button{'ng-click' => 'create()'} Add New Task
+        %button{'ng-click' => 'createTask()'} Add New Task
       %p{'ng-hide'=>'currentTaskList.tasks.length > 0'}
         This tasklist has no tasks
       %ul{'ng-show'=>'currentTaskList.tasks.length > 0'}
-        %li{'ng-repeat'=>'task in currentTaskList.tasks  | orderBy:sortMethod:sortDirection', 'ng-include' => "'task.html'"}
+        %li{'ng-repeat'=>'task in currentTaskList.tasks | orderBy:currentTaskList.orderBy:currentTaskList.orderDesc',
+              'ng-include' => "'task.html'"}
 

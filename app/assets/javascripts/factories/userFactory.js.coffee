@@ -28,4 +28,5 @@
     cancel_edit_tasklist: (model) ->
       model.editing = false
 
+
 ]

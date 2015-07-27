@@ -1,16 +1,21 @@
-.task
-  %input{'type'=>'checkbox', 'ng-model' => 'task.completed', 'ng-change' => 'update(task)' }
+-#.task{'ng-controller' => 'tasksController', 'dnd-draggable' => 'task', 'dnd-moved'=> 'currentTaskList.tasks.splice($index, 1)', 'dnd-type' => "'task'"}
+.task{'ng-controller' => 'tasksController'}
+  %input{'type'=>'checkbox', 'ng-model' => 'task.completed', 'ng-change' => 'update()', 'ng-disabled' => 'task.editing' }
   .task-line
-    .due-date
-      {{task.due_date_formatted}}
+    .task-top-bar
+      %task-datepicker.due-date{'task' =>'task', 'on-change' => 'update()'}
+      .priority
+        .priority-text{'ng-hide' => 'task.editing'}
+          {{task.priority}}
+        %input{'ng-show' => 'task.editing','ng-model' => 'task.newPriority'}
     %div{'ng-hide' => 'task.editing'}
       .task-menu-item
         {{task.description}}
-      %button{'ng-click' => 'edit(task)'} Edit
-      %button{'ng-click' => 'delete(task)'} Delete
+      %button{'ng-click' => 'edit()'} Edit
+      %button{'ng-click' => 'delete()'} Delete
     %div{'ng-show' => 'task.editing'}
-      %textarea{'ng-model' => 'task.description'}
-      %button{'ng-click' => 'update(task)'} Save
-      %button{'ng-click' => 'cancel(task)'} Cancel
+      %textarea{'ng-model' => 'task.newDescription'}
+      %button{'ng-click' => 'update()'} Save
+      %button{'ng-click' => 'cancel()'} Cancel
 
   .clear

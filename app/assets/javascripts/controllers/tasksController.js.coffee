@@ -1,23 +1,15 @@
 @toDoDemoApp.controller('tasksController', [ '$scope',   ($scope) ->
-  $scope.sortMethod = 'priority'
-  $scope.sortDirection = true
+  $scope.delete= () ->
+    if confirm "Are you sure you want to remove the task '#{$scope.task.description}'?"
+      $scope.currentTaskList.delete_task($scope.task)
 
+  $scope.update= () ->
+    $scope.currentTaskList.update_task($scope.task)
 
-  $scope.create= () ->
-    $scope.currentTaskList.create_task({description: $scope.newTaskDescription}).then (result) =>
-      $scope.newTaskDescription = ''
+  $scope.edit= () ->
+    $scope.currentTaskList.edit_task($scope.task)
 
-  $scope.delete= (task) ->
-    if confirm "Are you sure you want to remove the task '#{task.description}'?"
-      $scope.currentTaskList.delete_task(task)
-
-  $scope.update= (task) ->
-    $scope.currentTaskList.update_task(task)
-
-  $scope.edit= (task) ->
-    $scope.user.edit_tasklist(task)
-
-  $scope.cancel= (task) ->
-    $scope.user.cancel_edit_tasklist(task)
+  $scope.cancel= () ->
+    $scope.currentTaskList.cancel_edit_task($scope.task)
 
 ])
