@@ -11,11 +11,11 @@
     %div{'ng-hide' => 'task.editing'}
       .task-menu-item
         {{task.description}}
-      %button{'ng-click' => 'edit()'} Edit
-      %button{'ng-click' => 'delete()'} Delete
+      %button.small-btn{'ng-click' => 'edit()'} Edit
+      %button.small-btn{'ng-click' => 'delete()'} Delete
     %div{'ng-show' => 'task.editing'}
       %textarea{'ng-model' => 'task.newDescription'}
-      %button{'ng-click' => 'update()'} Save
-      %button{'ng-click' => 'cancel()'} Cancel
+      %button.small-btn{'ng-click' => 'update()'} Save
+      %button.small-btn{'ng-click' => 'cancel()'} Cancel
 
   .clear

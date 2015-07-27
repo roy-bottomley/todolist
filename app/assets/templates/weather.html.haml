@@ -1,19 +1,19 @@
 .weather
   %img{'ng-src'=>"{{location.url}}"}
-  {{location.condition}} degrees {{location.temperature}}
-  %br
-  {{location.title}}
-  %br
-  {{location.text}}
-  Forecast:
-  %br
-  %div{'ng-repeat' => 'forecast in location.forecasts'}
-    {{forecast.day}} - {{forecast.text}}.  High: {{forecast.high}} Low: {{forecast.low}}
+  .location
+    {{location.title}}
     %br
-  More information
-  %br
-  %a{'ng-href'=>"{{location.link}}"} here
-  %p
+    {{location.condition}} degrees {{location.temperature}}
+    %br
+    More information
+    %a{'ng-href'=>"{{location.link}}"} here
+  .forecast
+    Forecast:
+    %br
+    %div{'ng-repeat' => 'forecast in location.forecasts'}
+      {{forecast.day}} - {{forecast.text}}.  High: {{forecast.high}} Low: {{forecast.low}}
+      %br
+  .weather-selector
     Weather location
     %input{'ng-model' => 'weather.currentLocation'}
-    %button{'ng-click' => 'showWeather()'} Change
+    %button.btn{'ng-click' => 'showWeather()'} Change

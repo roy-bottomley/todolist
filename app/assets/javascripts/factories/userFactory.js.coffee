@@ -1,6 +1,6 @@
 @toDoDemoApp.factory 'User', [  'serverInterface', 'Tasklist', (serverInterface, Tasklist) ->
   class User
-    constructor: (@id) ->
+    constructor: (@id, @email) ->
       # server address for tasklists
       @tasklists = []
       @serverInterface = new serverInterface('/api/task_lists/', @tasklists)

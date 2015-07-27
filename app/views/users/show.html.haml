@@ -2,25 +2,25 @@
 .any{'ng-controller' => 'usersController'}
   %flash
   .top-section
-    %h1
+    %h2.title-intro Logged in as
+    .right= link_to "Log Out", destroy_user_session_path
+    %h1.title
       {{user.email}}
-    %li= link_to "Log Out", destroy_user_session_path
-    %li= link_to "Log In", new_user_session_path
     %div{'ng-repeat'=> 'location in weather.locations', 'ng-include' => "'weather.html'"}
   .any{'ng-controller' => 'tasklistsController'}
     .tasklist-section
       %h2 Tasklists
       .new-task-list
         %input#tasklistNewName{'ng-model' => 'newTaskName'}
-        %button{'ng-click' => 'create()'} Add New Tasklist
+        %button.btn{'ng-click' => 'create()'} Add New Tasklist
       %p{'ng-hide'=>'user.tasklists.length > 0'}
         You have no tasklists
       %ul{'ng-show'=>'user.tasklists.length > 0'}
         %li{'ng-repeat'=>'tasklist in user.tasklists | orderBy:sortMethod:sortDirection ',  'ng-include' => "'tasklist.html'"}
 
     .task-section
-      %h2.task-intro Tasks for
-      %h2.task-title
+      %h2.title-intro Tasks for
+      %h2.title
         {{currentTaskList.name}}
       %p
         Order tasks by
@@ -28,7 +28,7 @@
         %input{'type' => 'radio', 'ng-model'=>'currentTaskList.orderBy', 'value'=>'priority', 'ng-change'=>"changeSort()"} Priority
       .new-task
         %textarea#taskNewDescription{'ng-model' => 'newTaskDescription'}
-        %button{'ng-click' => 'createTask()'} Add New Task
+        %button.btn{'ng-click' => 'createTask()'} Add New Task
       %p{'ng-hide'=>'currentTaskList.tasks.length > 0'}
         This tasklist has no tasks
       %ul{'ng-show'=>'currentTaskList.tasks.length > 0'}
