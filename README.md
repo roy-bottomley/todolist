@@ -56,6 +56,6 @@ The are three Angular factories
 ## Todo
 
 1. include ui-router to easily display users and tasks on different pages
-2. include ui-sortable to allow drag and drop operations to change task priorities
+2. include ui-sortable to allow drag and drop operations to change task and tasklist priorities
 3. implement a devise login over json
 

@@ -16,7 +16,7 @@
       %p{'ng-hide'=>'user.tasklists.length > 0'}
         You have no tasklists
       %ul{'ng-show'=>'user.tasklists.length > 0'}
-        %li{'ng-repeat'=>'tasklist in user.tasklists | orderBy:sortMethod:sortDirection ',  'ng-include' => "'tasklist.html'"}
+        %li{'ng-repeat'=>"tasklist in user.tasklists | orderBy:'priority':true",  'ng-include' => "'tasklist.html'"}
 
     .task-section
       %div{'ng-hide' => 'currentTaskList'}

@@ -18,6 +18,8 @@ class TaskList < ActiveRecord::Base
   validates :priority, :numericality => true
   validates :name, uniqueness: { scope: [:user_id] }
 
+  before_create :set_priority
+
   def number_of_completed_tasks
     tasks.where(completed: true).size
   end
@@ -29,5 +31,14 @@ class TaskList < ActiveRecord::Base
   def status
     "#{(100 * number_of_completed_tasks / number_of_tasks).floor}%" if number_of_tasks > 0
   end
+
+  before_create :set_priority
+
+  private
+
+  def set_priority
+    self.priority =  user.task_lists.maximum('priority') + 1 if user && user.task_lists.size > 0
+  end
+
 
 end

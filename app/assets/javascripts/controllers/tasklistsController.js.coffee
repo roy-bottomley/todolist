@@ -27,7 +27,4 @@
   $scope.changeSort= () =>
     $scope.currentTaskList.setSortOrder()
 
-
-
-
 ])

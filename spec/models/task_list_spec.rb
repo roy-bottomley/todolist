@@ -105,4 +105,19 @@ RSpec.describe TaskList, :type => :model do
 
   end
 
+  describe "setting priority" do
+    before(:all) {
+      user =  FactoryGirl.create(:user)
+      @tasklist0 = user.task_lists.create(name: 'priority0')
+      @tasklist1 = user.task_lists.create(name: 'priority1')
+      @tasklist2 = user.task_lists.create(name: 'priority2')
+    }
+
+    it("should have a higher priority for the last task added ") {
+      expect(@tasklist1.priority).to be >  @tasklist0.priority
+      expect(@tasklist2.priority).to be >  @tasklist1.priority
+    }
+
+  end
+
 end
