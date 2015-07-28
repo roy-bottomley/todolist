@@ -75,6 +75,7 @@ end
 When /^I sign in with valid credentials$/ do
   create_visitor
   sign_in
+  a = 1
 end
 
 When /^I sign out$/ do

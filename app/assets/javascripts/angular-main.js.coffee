@@ -8,6 +8,7 @@
 ]
 
 
-@toDoDemoApp.run  [  "$rootElement", ( $rootElement) ->
+@toDoDemoApp.run  [ '$location',  "$rootElement", ($location,  $rootElement) ->
+#  must pass $location in to make the off click work
   $rootElement.off('click')
 ]

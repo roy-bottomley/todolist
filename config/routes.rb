@@ -1,7 +1,7 @@
 Todolist::Application.routes.draw do
 
   root :to => "users#index"
-  devise_for :users, controllers: { registrations: 'custom_devise/registrations', sessions: 'custom_devise/sessions'}
+  devise_for :users, controllers: { registrations: 'custom_devise/registrations'}
 
   resources :users, :only => [:index, :show]
 
