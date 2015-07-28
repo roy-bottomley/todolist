@@ -47,8 +47,8 @@ RSpec.describe User, :type => :model do
       expect(user).to be_valid
     }
 
-    it("should not be valid with a password less than 6 chars") {
-      user = User.new(email: 'someone@somewhere.com', password: 'passwor')
+    it("should not be valid with a password less than 4 chars") {
+      user = User.new(email: 'someone@somewhere.com', password: 'pas')
       expect(user).to_not be_valid
     }
 
