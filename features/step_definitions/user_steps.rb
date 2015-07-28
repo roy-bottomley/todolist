@@ -1,7 +1,7 @@
 
 
 def create_visitor
-  @visitor ||= { :email => "example@example.com",
+  @visitor ||= { :email => "roy.bottomley@virginmedia.com",
     :password => "changeme", :password_confirmation => "changeme" }
 end
 
@@ -19,8 +19,13 @@ end
 def create_user
   create_visitor
   delete_user
-  @user = FactoryGirl.create(:user, @visitor)
+  begin
+    @user = FactoryGirl.create(:user, @visitor)
+  rescue
+    @user = FactoryGirl.build(:user, @visitor)
+  end
 end
+
 
 def delete_user
   @user ||= User.where(:email => @visitor[:email]).first
