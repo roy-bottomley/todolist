@@ -4,4 +4,5 @@ class UserSerializer < ActiveModel::Serializer
   def email
     object.email
   end
+
 end

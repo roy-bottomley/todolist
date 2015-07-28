@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: :show
   def index
-    redirect_to  user_path(current_user) if current_user
   end
 
   def show
@@ -14,4 +13,7 @@ class UsersController < ApplicationController
 
   end
 
+  def delete
+    redirect_to destroy_user_session_path
+  end
 end

@@ -1,7 +1,7 @@
 Todolist::Application.routes.draw do
 
   root :to => "users#index"
-  devise_for :users, controllers: { registrations: 'custom_devise/registrations'}
+  devise_for :users, controllers: { registrations: 'custom_devise/registrations', sessions: 'custom_devise/sessions'}
 
   resources :users, :only => [:index, :show]
 
@@ -11,7 +11,7 @@ Todolist::Application.routes.draw do
     resources :weathers, only: [:show]
   end
 
-  match '*path' => redirect('/'), via: :get
+  # match '*path' => redirect('/'), via: :get
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

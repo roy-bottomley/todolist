@@ -7,3 +7,7 @@
   $locationProvider.html5Mode(true)
 ]
 
+
+@toDoDemoApp.run  [  "$rootElement", ( $rootElement) ->
+  $rootElement.off('click')
+]
